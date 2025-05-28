@@ -11,5 +11,10 @@
     <script src="{{asset('build/assets/app-751f7b87.js')}}"></script>
     <script src="{{asset('build/assets/diary-2efdbf10.js')}}"></script>
     <script src="{{asset('build/assets/general-2d77b5fb.js')}}"></script>
-    {{-- @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/general.js', 'resources/js/diary.js']) --}}
 </head>
+
+@push('scripts')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+@endpush

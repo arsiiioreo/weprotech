@@ -31,7 +31,11 @@
                             Start your WeProTech journey today and take back control with secure, 
                             easy-to-access password management built for peace of mind.
                         </p>
+                        @if ($loggedIn)
+                        <a href="{{ route('home') }}" class="btn mt-1 fw-semibold text-center px-4 py-3" style="width: 250px; border-radius: 10px; background-color: white; color: #191919;">Get Started</a>
+                        @else
                         <button class="btn mt-1 fw-semibold" style="height: 55px; width: 250px; border-radius: 10px; background-color: white; color: #191919;" data-bs-toggle="modal" data-bs-target="#registrationModal">Get Started</button>
+                        @endif
                     </div>
                     <div class="d-flex justify-content-center align-items-center" style="width: 40%">
                         <img src="{{ asset('images/landing_banner.png')}}" alt="" width="70%"; height="auto">
@@ -103,6 +107,14 @@
             </div>
         </div>
         <div class="p-5 d-flex justify-content-between">
+            @if($loggedIn)
+            <div class="ms-5">
+                <h3 class="fw-bold text-white">CONTINUE WITH YOUR JOURNEY!</h3>
+            </div>
+            <div class="me-5 text-end">
+                <a href="{{route('home')}}" class="btn btn-light border-light bg-none ms-4 fw-bold px-5">HOME</a>
+            </div>
+            @else
             <div class="ms-5">
                 <h3 class="fw-bold text-white">START YOUR JOURNEY!</h3>
             </div>
@@ -110,6 +122,7 @@
                 <button data-bs-toggle="modal" data-bs-target="#loginModal" class="btn btn-light border-light bg-none ms-4 fw-bold px-5">LOGIN</button>
                 <button data-bs-toggle="modal" data-bs-target="#registrationModal" class="btn btn-light ms-4 fw-bold px-5">REGISTER</button>
             </div>
+            @endif
         </div>
         <div class="d-flex align-items-center justify-content-between" style="background-color: #dadada; height: 400px; width: 100%;">
             <div class="d-flex flex-column justify-content-center align-items-center h-100 w-25">

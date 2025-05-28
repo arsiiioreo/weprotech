@@ -16,7 +16,7 @@
         };
         const formattedTime = now.toLocaleString('en-US', options);
         document.getElementById('current-time').innerText = formattedTime;
-    }
+    } 
 
     setInterval(updateClock, 1000);
 

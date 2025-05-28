@@ -17,7 +17,6 @@
         @endphp
         <div class="fs-1 fw-bold">{{ $user['name'] }}</div>
         <div class="fs-5">{{ '@' . $user['username'] }}</div>
-        {{$secret}}
     </span>
 </div>
 @endsection
