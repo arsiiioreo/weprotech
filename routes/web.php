@@ -37,11 +37,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('/logout', [UserController::class, 'logout'])->name('logout');
     
-    Route::post('/vault/verify/', [SecretPasswordController::class, 'verifyPassword']);
     Route::post('/set-vault-password', [SecretPasswordController::class, 'setPassword'])->name('set.vault.password');
-
+    
     Route::middleware(['vault.set'])->group(function () {
-        Route::get('/diary', [SecretMessageController::class, 'index'])->name('diary');
+        Route::post('/vault/verify', [SecretPasswordController::class, 'verifyPassword']);
         
         // Accounts
         Route::get('/accounts', [SecretAccountController::class, 'index'])->name('accounts');
@@ -51,6 +50,11 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/update-account', [SecretAccountController::class, 'updateSecretAccount'])->name('updateSecretAccount');
         Route::post('/delete-account/{id}', [SecretAccountController::class, 'deleteSecretAccount'])->name('deleteSecretAccount');
         
+        // Diaries
+        Route::get('/diary', [SecretMessageController::class, 'index'])->name('diary');
+        Route::post('/add-diary', [SecretMessageController::class, 'createSecretMessage'])->name('add-diary');
+        Route::post('/delete-diary/{id}', [SecretMessageController::class, 'deleteSecretMessage'])->name('delete-diary');
+
         Route::get('/profile-edit', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');        

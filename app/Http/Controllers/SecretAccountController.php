@@ -50,7 +50,7 @@ class SecretAccountController extends Controller
         if ($validator->fails()) {
             return redirect()->back()
             ->withInput()
-            ->with('accountModal', true)
+            ->with('add', true)
             ->withErrors($validator->errors());
         }
 

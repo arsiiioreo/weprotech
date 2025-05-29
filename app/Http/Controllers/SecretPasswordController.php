@@ -42,22 +42,45 @@ class SecretPasswordController extends Controller
 
     public function verifyPassword(Request $request)
     {
-        $request->validate([
+        $data = json_decode($request->getContent(), true);
+
+        $validator = Validator::make($data, [
             'password' => 'required|string|min:6',
         ]);
 
-        if(Auth::id()) {
-            $secretPassword = User::find(Auth::id())->first();
-    
-            if ($secretPassword && password_verify($request->password, $secretPassword->vault_password)) {
-                return response()->json(['type' => 'success', 'message' => 'Password verified successfully'], 200);
-            }
+        if ($validator->fails()) {
+            return response()->json([
+                'type' => 'error',
+                'message' => 'Invalid input: ' . $validator->errors()->first()
+            ], 422);
         }
-        // // Validate the request data
 
+        $password = $data['password'];
 
-        // return response()->json(['type' => 'error', 'message' => 'Incorrect password'], 401);
+        dd($password);
+
+        $user = User::find(Auth::id());
+        if (!$user) {
+            return response()->json([
+                'type' => 'error',
+                'message' => 'User not found'
+            ], 404);
+        }
+
+        // Verify password
+        if (password_verify($password, $user->vault_password)) {
+            return response()->json([
+                'type' => 'success',
+                'message' => 'Password verified successfully'
+            ], 200);
+        }
+
+        return response()->json([
+            'type' => 'error',
+            'message' => 'Incorrect password'
+        ], 401);
     }
+
 
     public function changePassword(Request $request)
     {

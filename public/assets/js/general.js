@@ -96,3 +96,4 @@ function messageToast(message, type) {
 }
 
 window.messageToast = messageToast;
+

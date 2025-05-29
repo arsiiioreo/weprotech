@@ -24,7 +24,7 @@
         @endif
 
         <main class="d-flex justify-content-start align-items-center w-100 p-4 ps-0" style="height: 100vh">
-            <div class="bg-white rounded-4 d-flex flex-column p-4 w-100 h-100 overflow-auto">
+            <div class="bg-white rounded-4 d-flex flex-column p-4 w-100 h-100 overflow-hidden">
                 @yield('content')
             </div>
         </main>

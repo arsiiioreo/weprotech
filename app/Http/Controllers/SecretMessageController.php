@@ -3,39 +3,56 @@
 namespace App\Http\Controllers;
 
 use App\Models\SecretMessage;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Validator;
 
 class SecretMessageController extends Controller
 {
     public function index() {
-        $data = [
-            
-        ];
+        $diaries = SecretMessage::where('user_id', Auth::id())
+        ->where('isDeleted', '0')
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+        foreach($diaries as $diary) {
+            $diary->title = Crypt::decryptString($diary->title);
+            $diary->messageDecrypted = Crypt::decryptString($diary->message);
+            $diary->created_at_human = $diary->created_at->diffForHumans();
+        }
 
         return view('client.diary', [
             'title' => 'WeProTech - Diary',
-            $data,
+            'diaries' => $diaries,
         ]);
     }
 
     public function createSecretMessage(Request $request)
     {
-        // Validate the request data
-        $request->validate([
-            'user_id' => 'required|integer|exists:users,id',
+       $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
             'message' => 'required|string',
-        ]);
+       ]);
+
+       if ($validator->fails()) {
+            return redirect()->back()
+            ->withInput()
+            ->with('diaryModal', true)
+            ->withErrors($validator->errors());
+        }
 
         // Create a new secret account
         $secretMessage = new SecretMessage();
-        $secretMessage->user_id = $request->user_id;
+        $secretMessage->user_id = Auth::id();
         $secretMessage->title = Crypt::encryptString($request->title);
         $secretMessage->message = Crypt::encryptString($request->message);
         $secretMessage->save();
 
-        return response()->json(['status' => 'success', 'message' => 'Secret message created successfully'], 200);
+        return redirect()->back()
+            ->with('type', 'success')
+            ->with('message', 'Diary successfully saved.');
     }
 
     public function getSecretMessage(Request $request)
@@ -100,16 +117,9 @@ class SecretMessageController extends Controller
 
     public function deleteSecretMessage(Request $request)
     {
-        // Validate the request data
-        $request->validate([
-            'id' => 'required|integer|exists:secret_messages,id',
-        ]);
-
-        // Find the secret account
         $secretMessage = SecretMessage::find($request->id);
-
-        // Delete the secret account
-        $secretMessage->delete();
+        $secretMessage->isDeleted = '1';
+        $secretMessage->save();
 
         return response()->json(['status' => 'success', 'message' => 'Secret message deleted successfully'], 200);
     }

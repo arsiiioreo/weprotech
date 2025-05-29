@@ -1,10 +1,20 @@
-<div class="d-flex justify-content-between align-items-center w-100 pb-4">
-    <h2 class="text-center fs-3 m-0 ps-2" style="font-weight: 800">{{$header}}</h2>
-    <div class="d-flex align-items-center">
-        <p class="m-0 me-2">Today: <span class="fw-bold" id="current-time"></span></p>
-        <img class="avatar" src="{{ asset('images/dark_logo.png') }}" alt="" style="width: 35px; border-radius: 50%; border: 2px solid #191919;">
-    </div>
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center w-100 pb-3 border-bottom border-1 mb-4 gap-2 gap-md-0">
+  
+  <h2 class="fs-3 fs-md-3 m-0 ps-2" style="font-weight: 800;">
+    {{ $header }}
+  </h2>
+
+  <div class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center ps-2 ps-md-0">
+    <p class="m-0 me-sm-3 mb-1 mb-sm-0 small small-md">
+      Today: <span class="fw-bold" id="current-time"></span>
+    </p>
+
+    <img class="avatar" src="{{ asset('images/dark_logo.png') }}" alt="Avatar"
+      style="width: 35px; border-radius: 50%; border: 2px solid #191919;">
+  </div>
+
 </div>
+
 
 <script>
     function updateClock() {

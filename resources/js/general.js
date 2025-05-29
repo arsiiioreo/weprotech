@@ -12,7 +12,15 @@ function featureUnavailable() {
 window.featureUnavailable = featureUnavailable;
 
 
-async function vp(id) {
+async function vp() {
+    const modalElements = document.querySelectorAll('.modal');
+
+    modalElements.forEach(modalEl => {
+    const modalInstance = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+    modalInstance.hide();
+    });
+
+
     const { isConfirmed, value: password } = await Swal.fire({
         title: "Verify Vault Access",
         input: "password",
@@ -27,16 +35,21 @@ async function vp(id) {
         confirmButtonColor: "#3085d6",
     });
 
-    if (!isConfirmed) return false;
+    if (!isConfirmed) return null;
 
     try {
-        const res = await fetch(`vault/verify/${id}`, {
+        const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        const res = await fetch(`vault/verify`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': token,
             },
-            body: JSON.stringify({ password: password, id: id })
+            body: JSON.stringify({ password: password})
         });
+
+        console.log(password);
+        
 
         const data = await res.json();
 
@@ -96,3 +109,23 @@ function messageToast(message, type) {
 }
 
 window.messageToast = messageToast;
+
+document.addEventListener('DOMContentLoaded', function () {
+    const modals = document.querySelectorAll('.modal');
+
+    modals.forEach(modal => {
+        modal.addEventListener('hidden.bs.modal', function () {
+            modal.querySelectorAll('input, textarea, select').forEach(el => {
+                if (el.tagName === 'SELECT') {
+                el.selectedIndex = 0;
+                } else {
+                el.value = '';
+                }
+            });
+
+            modal.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(el => {
+                el.checked = false;
+            });   
+        });
+    });
+});

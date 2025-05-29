@@ -7,10 +7,17 @@
     <title>{{ $title ? $title : 'WeProTech' }}</title>
 
     <link rel="shortcut icon" href="{{asset('images/dark_logo.png')}}" type="image/x-icon">
-    <link rel="stylesheet" href="{{asset('build/assets/app-a2f2d654.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('build/assets/app-a2f2d654.css')}}">
     <script src="{{asset('build/assets/app-751f7b87.js')}}"></script>
     <script src="{{asset('build/assets/diary-2efdbf10.js')}}"></script>
     <script src="{{asset('build/assets/general-2d77b5fb.js')}}"></script>
+    <script src="{{asset('resources/js/general.js')}}"></script> --}}
+    @vite([
+        'resources/js/general.js', 
+        'resources/js/diary.js', 
+        'resources/js/app.js', 
+        'resources/css/app.css', 
+        ])
 </head>
 
 @push('scripts')
