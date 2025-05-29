@@ -12,6 +12,45 @@ function featureUnavailable() {
 window.featureUnavailable = featureUnavailable;
 
 
+async function logout() {
+  const result = await Swal.fire({
+    title: "Are you sure?",
+    text: "Are you sure you want to logout?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes",
+  });
+
+  if (result.isConfirmed) {
+    // Show loading spinner
+    Swal.fire({
+      title: "Logging out...",
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+
+    try {
+      await axios.get(`/logout`);
+
+      // Show success after spinner
+      Swal.fire("Logged Out!", "You have been successfully logged out.", "success").then(() => {
+        location.href('/');
+      });
+    } catch (error) {
+      Swal.fire("Error", "Something went wrong while logging out.", "error");
+      console.error(error);
+    }
+  }
+}
+
+
+window.logout = logout;
+
+
 async function vp() {
     const modalElements = document.querySelectorAll('.modal');
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AuditLogs;
 use App\Models\SecretMessage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;

@@ -28,7 +28,7 @@
         <ul class="navbar-nav flex-grow-1 justify-content-end">
             <li class="active rounded-2">
                 {{-- <a href="{{ route('logout') }}" class="text-white text-decoration-none d-flex flex-column align-items-center p-3"> --}}
-                <a href="{{ route('logout') }}" class="text-white text-decoration-none d-flex flex-column align-items-center p-3">
+                <a href="javascript:void(0)" onclick="logout()" class="text-white text-decoration-none d-flex flex-column align-items-center p-3">
                     <i class="bi bi-box-arrow-right mb-1"></i>
                     <small>Logout</small>
                 </a>

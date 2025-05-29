@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AuditLogs;
 use App\Models\SecretPassword;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -52,7 +53,12 @@ class UserController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
+        
         Auth::login($user);
+        AuditLogs::create([
+            'user_id' => $user->id,
+            'action' => 'Account Created'
+        ]);
         return redirect()->intended(RouteServiceProvider::HOME)->with('success', 'Account created successfully!');
     }
 
@@ -72,6 +78,11 @@ class UserController extends Controller
         if ($user && password_verify($request->password, $user->password)) {
             // dd('nakarating ka rin');
             Auth::login($user); // 
+            AuditLogs::create([
+            'user_id' => Auth::id(),
+            'action' => 'login',
+            'text' => 'User logged in.'
+            ]);
             $request->session()->regenerate();
 
             return redirect()->intended(RouteServiceProvider::HOME); 
@@ -185,12 +196,17 @@ class UserController extends Controller
 
     public function logout(Request $request)
     {
+        AuditLogs::create([
+            'user_id' => Auth::id(),
+            'action' => 'logout',
+            'text' => 'User logged out.'
+        ]);
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return;
     }
 }

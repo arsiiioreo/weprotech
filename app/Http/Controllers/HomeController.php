@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AuditLogs;
 use App\Models\SecretAccount;
 use App\Models\SecretMessage;
 use Illuminate\Http\Request;
@@ -17,6 +18,7 @@ class HomeController extends Controller
             'user' => $user,
             'totalAccounts' => SecretAccount::where('user_id', Auth::id())->count(),
             'totalSecrets' => SecretMessage::where('user_id', Auth::id())->count(),
+            'totalLogs' => AuditLogs::where('user_id', Auth::id())->count(),
         ]);
     }
 }

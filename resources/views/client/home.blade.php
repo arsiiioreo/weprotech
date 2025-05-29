@@ -61,7 +61,7 @@
             'logs' => [
                 'title' => 'Activity Logs',
                 'text' => 'total transaction history',
-                'data' => 32,
+                'data' => $totalLogs,
                 'route' => '/logs',
                 'color1' => '#A8E6CF',
                 'color2' => '#DCEDC1',
