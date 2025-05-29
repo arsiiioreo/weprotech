@@ -19,7 +19,6 @@ async function viewDiary(id) {
 window.viewDiary = viewDiary;
 
 async function deleteDiary(id) {
-  // const verified = await vp();
   const result = await Swal.fire({
     title: "Are you sure?",
     text: "You won't be able to revert this!",
@@ -30,9 +29,18 @@ async function deleteDiary(id) {
     confirmButtonText: "Yes, delete it!",
   });
 
-  if (result) {
-    alert('deleted');
-  } 
+  if (result.isConfirmed) {
+    try {
+      await axios.post(`/delete-diary/${id}`);
+
+      Swal.fire("Deleted!", "Your diary has been deleted.", "success").then(() => {
+        location.reload();
+      });
+    } catch (error) {
+      Swal.fire("Error", "Something went wrong while deleting.", "error");
+      console.error(error);
+    }
+  }
 }
 
 
