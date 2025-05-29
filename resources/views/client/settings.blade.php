@@ -11,7 +11,7 @@
     ];
 @endphp
 
-<nav class="navbar navbar-expand-lg bg-body-secondary rounded-2">
+<nav class="navbar navbar-expand-lg bg-body-tertiary rounded-2">
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="settings-tabs">

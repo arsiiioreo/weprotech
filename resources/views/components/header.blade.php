@@ -9,7 +9,7 @@
       Today: <span class="fw-bold" id="current-time"></span>
     </p>
 
-    <img class="avatar" src="{{ asset('images/dark_logo.png') }}" alt="Avatar"
+    <img src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&background=191919&color=fff&size=64"
       style="width: 35px; border-radius: 50%; border: 2px solid #191919;">
   </div>
 
