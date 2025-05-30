@@ -11,37 +11,88 @@
     ];
 @endphp
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary rounded-2">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="settings-tabs">
-                @foreach ($tabs as $key => $tab)
-                    <li class="nav-item">
-                        <a 
-                            class="nav-link {{ $loop->first ? 'navActive' : '' }}" 
-                            href="javascript:void(0);" 
-                            data-tab="{{ $key }}"
-                        >
-                            {{ $tab['name'] }}
-                        </a>
-                    </li>
-                @endforeach
-            </ul>
+@php
+  use Jenssegers\Agent\Agent;
+  $agent = new Agent();
+@endphp
+@if ($agent->isMobile())
+    <nav class="navbar navbar-expand-lg bg-body-tertiary rounded-2">
+        <div class="container-fluid">
+
+            <!-- Toggler button for mobile -->
+            <button class="navbar-toggler text-end" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 w-100 d-lg-flex" id="settings-tabs">
+                    @foreach ($tabs as $key => $tab)
+                        <li class="nav-item">
+                            <a 
+                                class="nav-link {{ $loop->first ? 'navActive' : '' }}" 
+                                href="javascript:void(0);" 
+                                data-tab="{{ $key }}"
+                            >
+                                {{ $tab['name'] }}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="tab-content" class="p-3 bg-body-tertiary mt-3 rounded-2 overflow-auto">
+        <div class="settings-tab-content" data-content="profile" style="display: block;">
+            @include('client.settings.profile')
+        </div>
+
+        <div class="settings-tab-content" data-content="password" style="display: none;">
+            @include('client.settings.password')
         </div>
     </div>
-</nav>
 
-<div id="tab-content" class="p-3 bg-body-tertiary mt-3 rounded-2 overflow-auto">
-    <div class="settings-tab-content" data-content="profile" style="display: block;">
-        @include('client.settings.profile')
+@else
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary rounded-2">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="settings-tabs">
+                    @foreach ($tabs as $key => $tab)
+                        <li class="nav-item">
+                            <a 
+                                class="nav-link {{ $loop->first ? 'navActive' : '' }}" 
+                                href="javascript:void(0);" 
+                                data-tab="{{ $key }}"
+                            >
+                                {{ $tab['name'] }}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="tab-content" class="p-3 bg-body-tertiary mt-3 rounded-2 overflow-auto">
+        <div class="settings-tab-content" data-content="profile" style="display: block;">
+            @include('client.settings.profile')
+        </div>
+
+        <div class="settings-tab-content" data-content="password" style="display: none;">
+            @include('client.settings.password')
+        </div>
     </div>
+@endif
 
-    <div class="settings-tab-content" data-content="password" style="display: none;">
-        @include('client.settings.password')
-    </div>
 
-    {{-- Add more sections here if needed --}}
-</div>
+
+
+
+
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {

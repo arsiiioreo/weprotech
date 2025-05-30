@@ -55,7 +55,7 @@ aside li:hover, .active {
 }
 
 .navActive {
-    border-bottom: 2px solid #191919;
+    border-bottom: 0.1rem solid #191919;
     font-weight: 500;
 }
 
@@ -105,4 +105,15 @@ form label {
 
 #accounts-table_filter input {
   min-width: 25rem;
+}
+
+::-webkit-scrollbar {
+  width: none;
+}
+
+
+@media (max-width: 576px) {
+  * {
+    font-size: 11px;
+  }
 }

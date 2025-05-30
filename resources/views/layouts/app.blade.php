@@ -23,6 +23,7 @@
             </script>
         @endif
 
+
         <main class="d-flex justify-content-start align-items-center w-100 p-4 ps-0" style="height: 100vh">
             <div class="rounded-4 d-flex flex-column p-4 w-100 h-100 overflow-hidden bg-body-secondary">
                 @yield('content')

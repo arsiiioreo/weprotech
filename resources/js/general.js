@@ -38,7 +38,6 @@ async function logout() {
 
       // Show success after spinner
       Swal.fire("Logged Out!", "You have been successfully logged out.", "success").then(() => {
-        location.href('/');
       });
     } catch (error) {
       Swal.fire("Error", "Something went wrong while logging out.", "error");

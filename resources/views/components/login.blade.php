@@ -45,7 +45,7 @@
                             <a href="#" style="color: #191919 !important"><small>Forgot password?</a></small>
                         </div>
                         <button type="submit" class="fw-semibold btn w-100 p-2 mt-1" style="background-color: #191919; color: white;">LOGIN</button>
-                        <p class="mt-4"><small>Doesn't have an account yet? <span class="fw-bold" data-bs-toggle="modal" data-bs-target="#registrationModal" style="cursor: pointer"><small>Register</small></span></small></p>
+                        <p class="mt-4 text-center"><small>Doesn't have an account yet? <span class="fw-bold" data-bs-toggle="modal" data-bs-target="#registrationModal" style="cursor: pointer"><small>Register</small></span></small></p>
                     </div>
                     <div class="d-flex align-items-center justify-content-center mb-4 w-75">
                         <span class="" style="border-bottom: 1px solid #191919; width: 45%; height:auto;"></span>
@@ -56,12 +56,12 @@
                         <button type="button" class="fw-bold btn w-100 p-2" style="border: 2px solid #191919; color: #191919;" onclick="featureUnavailable()">
                             <img src="{{ asset('images/google_pic.png') }}" 
                             alt="" class="me-3" style="width: auto; height: 20px;">
-                            <span class="mb-0 fw-semibold" style="font-size: 13px;">Continue with Google</span>
+                            <span class="mb-0 fw-semibold">Continue with Google</span>
                         </button>
                         <button type="button" class="fw-bold btn w-100 p-2" style="border: 2px solid #191919; color: #191919;" onclick="featureUnavailable()">
                             <img src="{{ asset('images/facebook_pic.png') }}" 
                             alt="" class="me-3" style="width: auto; height: 20px;">
-                            <span class="mb-0 fw-semibold" style="font-size: 13px;">Continue with Facebook</span>
+                            <span class="mb-0 fw-semibold">Continue with Facebook</span>
                         </button>
                     </div>
                 </div>

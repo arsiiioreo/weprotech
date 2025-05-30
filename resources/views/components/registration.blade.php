@@ -60,12 +60,12 @@
                         <button type="button" class="fw-bold btn w-100 p-2" style="border: 2px solid #191919; color: #191919;" onclick="featureUnavailable()">
                             <img src="{{ asset('images/google_pic.png') }}" 
                             alt="" class="me-3" style="width: auto; height: 20px;">
-                            <span class="mb-0 fw-semibold" style="font-size: 13px;">Continue with Google</span>
+                            <span class="mb-0 fw-semibold">Continue with Google</span>
                         </button>
                         <button type="button" class="fw-bold btn w-100 p-2" style="border: 2px solid #191919; color: #191919;" onclick="featureUnavailable()">
                             <img src="{{ asset('images/facebook_pic.png') }}" 
                             alt="" class="me-3" style="width: auto; height: 20px;">
-                            <span class="mb-0 fw-semibold" style="font-size: 13px;">Continue with Facebook</span>
+                            <span class="mb-0 fw-semibold">Continue with Facebook</span>
                         </button>
                     </div>
                 </div>
@@ -97,5 +97,14 @@
     form input[type=number],
     form button {
         padding: 10px 15px !important;
+    }
+
+    @media (max-width: 576px) {
+    .modal-body {
+        padding: 0px !important;
+    }
+    .modal-body h1 {
+        font-size: 1.2rem;
+    }
     }
 </style>
