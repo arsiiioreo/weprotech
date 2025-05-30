@@ -1,7 +1,7 @@
 <p align="center">
     <a href="#" style="color: #191919; font-weight: 800;">
     <img src="public/images/dark_logo.png" width="200" alt="WeProTech Logo">
-    <p align="center" style="font-size: 3rem;">WEPROTECH</p>
+    <h1 align="center">WEPROTECH</h1>
     </a>
 </p>
 
