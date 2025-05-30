@@ -1,66 +1,111 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+    <a href="#" style="color: #191919; font-weight: 800;">
+    <img src="public/images/dark_logo.png" width="200" alt="WeProTech Logo">
+    <p align="center" style="font-size: 3rem;">WEPROTECH</p>
+    </a>
 </p>
 
-## About Laravel
+# Overview
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+WeProTech is an web based application developed to secure secrets addressing the fundamental need for digital privacy. With features like
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Accounts Storage
+- Diary
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+WeProTech protects secrets that only the user needs to know.
 
-## Learning Laravel
+<br>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+<p align="center"><img src="resources/images/screenshots/landing_banner.png" align="center"></p>
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+<br><br><br>
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# Functionalities
 
-## Laravel Sponsors
+### Accounts Storage
+> Users sometimes tend to forget the passwords of their account. Using the same credentials when handling multiple accounts can be prone to easier data breach or even hacking. With WeProTech's accounts storage, user can now use different credentials to different application without the fear of forgetting their password. 
+<br><br> 
+This feature provides a storage vault with data encyrption to store the user's credentias. Leveraging the functionality and features offered by Laravel, users can store their accounts and retrieve their accounts' credentials smoothly.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### Diary
+> Want to vent something out but no one's there to listen? Diary let's you keep all secrets without having the fear of the tea spilling to the wrong people. This feature gives you a diary book that let's you type out all the secrets you want to spill. 
 
-### Premium Partners
+### Vault Password
+> Vault Password helps you secure your secrets. This is essential and acts as a secondary layer of security when viewing your secrets. This way, even if you accidentally left your account logged in, no one can view the content of your secrets. [ Feature added and implemented but not used ].
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+<br><br><br>
 
-## Contributing
+# System Walkthrough
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### WeProTech Landing Page
+> This is the designed version of the system's landing page. This is the starting point of the system.
 
-## Code of Conduct
+<img src="resources/images/screenshots/LANDING PAGE.png">
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### WeProTech Login
+> The login of WeProTech is a simple login modal component. This allows for easier integration of login to any part of the system. If the user already has an account, the user can login using this modal.
 
-## Security Vulnerabilities
+<img src="resources/images/screenshots/login.png">
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### WeProTech Registration
+> Similar to the Login, the Registration is also a modal. 
 
-## License
+<img src="resources/images/screenshots/registration.png">
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### WeProTech Home Screen - Setting Up Vault Password
+> Upon registration, the system will prompt you to set a vault password. This adds a secondary layer primarily used in securing the viewing of the data in your secrets. <br>
+> [Note]. Not setting up password vault is okay, but every reload, the system will keep prompting you to set the vault password. You can't also navigate to use or navigate at all to the main features. 
+
+<img src="resources/images/screenshots/home2.png">
+
+### WeProTech Home Screen
+
+> The home screen is a dashboard that display the total status of your usage. This includes cards that details the total accounts you've entrusts us, the total secets you've shared, and the total activity logs. At the bottom part, there is two cards that links you to the main features of the system.
+
+<img src="resources/images/screenshots/home1.png">
+
+### WeProTech Accounts Storage Page
+> The accounts storage page is the page that handles the secret accounts you want to save.
+
+<img src="resources/images/screenshots/accounts1.png">
+
+> Upon clicking the eye icon, a modal appears and display the saved account information. This includes the category, account name, account email, and the password that is hidden.
+
+<img src="resources/images/screenshots/accounts2.png">
+
+
+> To add security, the password display initially display the encrypted version of the password. With this, even though users have unintentional access to your weprotech account, you're still protected.
+
+<img src="resources/images/screenshots/accounts4.png">
+
+
+> The user can only view the decrypted version of the password when show password is clicked and vault password is verified.
+
+<img src="resources/images/screenshots/accounts4.png">
+
+### WeProTech Diary Page
+
+> The diary is where you spill all the secrets you wanna tell someone but don't trust someone enough to tell them. This feature is also encrypted with the vault password.
+
+<img src="resources/images/screenshots/diary1.png">
+<img src="resources/images/screenshots/diary2.png">
+
+### WeProTech Profile Page
+
+> The profile page displays the overview of the user's WeProTech Account including the user's name, username, email, and account creation date. Under the profile section is the user's Activity History that records and keeps track of the user's logs that includes user's login, logout, the creation of account and main features logs(create, edit, delete).
+
+<img src="resources/images/screenshots/profile1.png">
+<img src="resources/images/screenshots/profile2.png">
+
+<br><br><br>
+
+# Development Team
+This project is developed by the team named FSJinx consisting of two members:
+- **[Reignromar Chryzel Balico](https://www.facebook.com/arsiioreo)**
+- **[Eugene G. Tobias](https://www.facebook.com/EugeneNotFound)**
+
+<br>
+
+# Submission
+This project is of compliance to the subject IT APP DEV 5 - Cloud Computing and is submitted to Subject Professor 
+- **[John M. Facun, MSIT](https://www.facebook.com/jfacun20)**

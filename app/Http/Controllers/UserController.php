@@ -56,8 +56,9 @@ class UserController extends Controller
         
         Auth::login($user);
         AuditLogs::create([
-            'user_id' => $user->id,
-            'action' => 'Account Created'
+            'user_id' => Auth::id(),
+            'action' => 'create',
+            'text' => 'Account created.'
         ]);
         return redirect()->intended(RouteServiceProvider::HOME)->with('success', 'Account created successfully!');
     }
@@ -207,6 +208,8 @@ class UserController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect()->intended('/')
+            ->with('type', 'success')
+            ->with('message', 'Logged out successfully.');
     }
 }

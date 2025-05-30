@@ -29,16 +29,14 @@ async function logout() {
       title: "Logging out...",
       allowOutsideClick: false,
       didOpen: () => {
-        Swal.showLoading();
+          Swal.showLoading();
+          fetch('/logout')
       },
     });
 
     try {
       await axios.get(`/logout`);
 
-      // Show success after spinner
-      Swal.fire("Logged Out!", "You have been successfully logged out.", "success").then(() => {
-      });
     } catch (error) {
       Swal.fire("Error", "Something went wrong while logging out.", "error");
       console.error(error);
