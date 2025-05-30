@@ -1,3 +1,6 @@
+
+<!-- WEPROTECH -->
+
 <p align="center">
     <a href="#" style="color: #191919; font-weight: 800;">
     <img src="public/images/dark_logo.png" width="200" alt="WeProTech Logo">
