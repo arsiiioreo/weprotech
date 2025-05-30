@@ -81,7 +81,7 @@ This feature provides a storage vault with data encyrption to store the user's c
 
 > The user can only view the decrypted version of the password when show password is clicked and vault password is verified.
 
-<img src="resources/images/screenshots/accounts4.png">
+<img src="resources/images/screenshots/accounts3.png">
 
 ### WeProTech Diary Page
 
