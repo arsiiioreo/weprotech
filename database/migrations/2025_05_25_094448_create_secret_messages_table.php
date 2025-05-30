@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('title');
-            $table->string('message');
+            $table->text('message');
             $table->enum('isDeleted', ['0', '1'])->default('0');
             $table->timestamps();
         });
