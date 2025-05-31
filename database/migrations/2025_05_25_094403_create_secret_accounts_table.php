@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('secret_accounts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('category');
-            $table->string('account_name')->nullable();
-            $table->string('account_email')->nullable();
+            $table->text('category');
+            $table->text('account_name')->nullable();
+            $table->text('account_email')->nullable();
             $table->string('password');
             $table->enum('isDeleted', ['0', '1'])->default('0');
             $table->timestamps();
