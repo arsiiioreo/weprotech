@@ -11,7 +11,6 @@ class SecretPassword extends Model
 
     protected $fillable =[
         'user_id',
-        'type',
         'password',
     ];
 

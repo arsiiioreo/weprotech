@@ -130,29 +130,61 @@ class UserController extends Controller
 
     public function updateProfile(Request $request)
     {
-        // Validate the request data
         $request->validate([
-            'username' => 'string|max:255',
-            'email' => 'string|email|max:255',
+            'name' => 'string|max:255',
+            'old_password' => 'string|max:255',
         ]);
 
-        // Find the user by ID
-        $user = User::find($request->id);
-        if (!$user) {
-            return response()->json(['status' => 'error', 'message' => 'User not found'], 404);
+        $user = User::find(Auth::id());
+
+        if(password_verify($request->old_password, $user->password)) {
+            if (!$user) {
+                return response()->json(['status' => 'error', 'message' => 'User not found'], 404);
+            }
+            
+    
+    
+            if($request->name) {
+                $user->name = $request->name;
+            }
+            
+            if($request->username) {
+                if($request->username !== $user->username) {
+                    $request->validate([
+                        'username' => 'string|max:255|unique:users,username',
+                    ]);
+                }
+                 
+                $user->username = $request->username;
+            }
+    
+            if($request->email) {
+                if($request->email !== $user->email) {
+                    $request->validate([
+                        'email' => 'string|email|max:255|unique:users,email',
+                    ]);
+                }
+                $user->email = $request->email;
+            }
+    
+            if($request->new_password) {
+                $request->validate([
+                    'new_password' => 'string|max:255|confirmed',
+                ]);
+                $user->password = bcrypt($request->new_password);
+            }
+            $user->save();
+            AuditLogs::create([
+            'user_id' => Auth::id(),
+            'action' => 'edit',
+            'text' => 'Updated Profile.'   
+            ]);
+    
+            return back()->with('message', 'Profile updated successfully.')->with('type', 'success');
+        } else {
+            return back()->withInput()->with('message', 'Wrong password, please try again.')->with('type', 'error');
         }
 
-        // Update the user's profile
-        if($request->username) {
-            $user->username = $request->username;
-        }
-
-        if($request->email) {
-            $user->email = $request->email;
-        }
-        $user->save();
-
-        return response()->json(['status' => 'success', 'message' => 'Profile updated successfully'], 200);
     }
 
     public function changePassword(Request $request)

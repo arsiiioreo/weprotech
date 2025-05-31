@@ -70,6 +70,11 @@ form label {
     font-weight: 700;
 }
 
+table td {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
 
 .colored-toast.swal2-icon-success {
   background-color: #58b860 !important;
@@ -110,8 +115,6 @@ form label {
 ::-webkit-scrollbar {
   width: none;
 }
-
-
 @media (max-width: 576px) {
   * {
     font-size: 11px;

@@ -7,8 +7,16 @@
     <title>{{ $title ? $title : 'WeProTech' }}</title>
 
     <link rel="shortcut icon" href="{{asset('images/dark_logo.png')}}" type="image/x-icon">
-    @vite(['resources/js/general.js', 'resources/js/diary.js', 'resources/js/app.js', 'resources/css/app.css',])
+    @vite(['resources/js/general.js', 'resources/js/diary.js', 'resources/js/accounts.js', 'resources/js/app.js', 'resources/css/app.css',])
 </head>
+
+@if(session('message'))
+    <script>
+        window.addEventListener('load', function () {
+            messageToast(@json(session('message')), @json(session('type') ?? 'success'));
+        });
+    </script>
+@endif
 
 @push('scripts')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

@@ -11,7 +11,7 @@
       <span>ADD NEW</span>
     </button>
 
-    <table id="accounts-table" class="table table-striped table-hover text-center">
+    <table id="accounts-table" class="table table-striped table-hover text-center" style="table-layout: fixed">
         <thead class="position-sticky top-0 table-dark">
             <tr>
                 <th class="text-center" style="background-color: #191919 !important;" scope="col">Category</th>
@@ -25,38 +25,22 @@
             @foreach ($accounts as $item)
             <tr>
               <td>{{$item['category']}}</td>
-              <td>{{$item['account_name']}}</td>
+              <td>{{$item['account_name_decoded']}}</td>
               <td>{{$item['account_email']}}</td>
               <td>{{$item['created_at_human']}}</td>
               <td class="d-flex justify-content-center gap-1">
                   <a type="button" class="btn btn-primary" href="{{ route('openEditAccountModal', $item['id'])}}"><i class="bi bi-pencil-square"></i></a>
-                  <a type="button" class="btn btn-warning" href="{{ route('getSecretAccount', $item['id'])}}" ><i class="bi bi-eye-fill"></i></a>
-                  <button type="submit" class="btn btn-danger delete-confirm-btn">
+                  <a type="button" class="btn btn-warning" onclick="viewAccounts({{$item['id']}})"
+                  data-category={{$item['category']}}
+                  data-account_name={{$item['account_name_decoded']}}
+                  data-account_email={{$item['account_email_decoded']}}
+                  data-password={{$item['password']}}
+                  data-password_decoded={{$item['password_decoded']}}
+                  id={{ 'account-' . $item['id']}}
+                  ><i class="bi bi-eye-fill"></i></a>
+                  <button type="submit" class="btn btn-danger delete-confirm-btn" onclick="deleteAccount({{$item['id']}})">
                       <i class="bi bi-trash"></i>
                   </button>
-                  <form id="deleteAccount" action="{{ route('deleteSecretAccount', $item['id']) }}" method="POST" class="d-none">
-                    @csrf
-                  </form>
-                  @push('scripts')
-                      <script>
-                        document.querySelector('.delete-confirm-btn').addEventListener('click', function (e) {
-                          Swal.fire({
-                              title: "Are you sure?",
-                              text: "This action cannot be undone.",
-                              icon: "warning",
-                              showCancelButton: true,
-                              confirmButtonColor: "#d33",
-                              cancelButtonColor: "#6c757d",
-                              confirmButtonText: "Yes, delete it!",
-                              reverseButtons: true
-                          }).then((result) => {
-                              if (result.isConfirmed) {
-                                  document.getElementById('deleteAccount').submit();
-                              }
-                          });
-                        });
-                      </script>
-                  @endpush
               </td>
             </tr>
             @endforeach
@@ -159,22 +143,22 @@
       <div class="modal-body">
         <div class="mb-3">
           <label for="category" class="form-label">Category</label>
-          <input type="text" class="form-control" name="category"  value="{{ session('secretAccount.category') }}">
+          <input type="text" class="form-control" name="category" readonly id="viewCategory">
         </div>
 
         <div class="mb-3">
           <label for="account_name" class="form-label">Account Name</label>
-          <input type="text" class="form-control" name="account_name" readonly value="{{ session('secretAccount.account_name') }}">
+          <input type="text" class="form-control" name="account_name" readonly id="viewAccName">
         </div>
 
         <div class="mb-3">
           <label for="account_email" class="form-label">Account Email</label>
-          <input type="email" class="form-control" name="account_email" readonly value="{{ session('secretAccount.account_email') }}">
+          <input type="email" class="form-control" name="account_email" readonly id="viewAccEmail">
         </div>
 
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" name="password" id="viewPassword" readonly value="{{ session('secretAccount.password') }}">
+          <input type="password" class="form-control" name="password" id="viewPassword" readonly>
         </div>
 
         <div class="mb-3">
@@ -260,14 +244,6 @@
 @push('scripts')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-  document.getElementById('showPass')?.addEventListener('change', function () {
-    
-    const passField = document.getElementById('viewPassword');
-    passField.type = this.checked ? 'text' : 'password';
-    passField.value = this.checked ? '{{session('secretAccount.passwordDecoded')}}' : '{{session('secretAccount.password')}}';
-  
-});
-
 
 $(document).ready(function () {
   const table = $('#accounts-table').DataTable({

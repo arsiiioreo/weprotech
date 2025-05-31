@@ -1,19 +1,23 @@
 async function viewDiary(id) {
-  const viewDiaryModal = new bootstrap.Modal(document.getElementById('viewDiary'));
-  const card = document.getElementById(`diary-${id}`);
-
-  // Extract from data-*
-  const title = card.dataset.title;
-  const message = card.dataset.message;
-  const date = card.dataset.date;
-
-  // Populate modal
-  document.getElementById('accountDiaryTitle').innerText = title;
-  document.getElementById('accountDiaryMessage').innerText = message;
-  document.getElementById('accountDiaryDate').innerText = date;
-
-  document.getElementById('diaryDelete').onclick = () => deleteDiary(id);
-  viewDiaryModal.show();
+  const verified = await vp();
+  if (verified)
+  {
+    const viewDiaryModal = new bootstrap.Modal(document.getElementById('viewDiary'));
+    const card = document.getElementById(`diary-${id}`);
+  
+    // Extract from data-*
+    const title = card.dataset.title;
+    const message = card.dataset.message;
+    const date = card.dataset.date;
+  
+    // Populate modal
+    document.getElementById('accountDiaryTitle').innerText = title;
+    document.getElementById('accountDiaryMessage').innerText = message;
+    document.getElementById('accountDiaryDate').innerText = date;
+  
+    document.getElementById('diaryDelete').onclick = () => deleteDiary(id);
+    viewDiaryModal.show();  
+  }
 }
 
 window.viewDiary = viewDiary;
@@ -31,11 +35,7 @@ async function deleteDiary(id) {
 
   if (result.isConfirmed) {
     try {
-      await axios.post(`/delete-diary/${id}`);
-
-      Swal.fire("Deleted!", "Your diary has been deleted.", "success").then(() => {
-        location.reload();
-      });
+      location.replace(`/delete-diary/${id}`);
     } catch (error) {
       Swal.fire("Error", "Something went wrong while deleting.", "error");
       console.error(error);

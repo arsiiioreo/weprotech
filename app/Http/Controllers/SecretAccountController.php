@@ -21,14 +21,11 @@ class SecretAccountController extends Controller
 
         // Decrypt the sensitive data
         foreach ($secretAccounts as $account) {
-            $account->account_name = Crypt::decryptString($account->account_name);
-            $account->account_email = Crypt::decryptString($account->account_email);
-            $account->password = $account->password;
+            $account->account_name_decoded = Crypt::decryptString($account->account_name);
+            $account->account_email_decoded = Crypt::decryptString($account->account_email);
+            $account->password_decoded = Crypt::decryptString($account->password);
             $account->created_at_human = $account->created_at->diffForHumans();
         }
-
-        $this->data = $secretAccounts;
-        // dd($this->data);
 
         return view('client.accounts', [
             'title' => 'WeProTech - Accounts',
@@ -63,6 +60,11 @@ class SecretAccountController extends Controller
             $secretAccount->account_email = Crypt::encryptString($request->account_email);
             $secretAccount->password = Crypt::encryptString($request->password);
             $secretAccount->save();
+            AuditLogs::create([
+            'user_id' => Auth::id(),
+            'action' => 'create',
+            'text' => 'Created new secret account.'   
+            ]);
 
             return redirect()->back()
             ->with('type', 'success')
@@ -158,6 +160,11 @@ class SecretAccountController extends Controller
             }
             $secretAccount->save();
             session()->forget('editAccount');
+            AuditLogs::create([
+            'user_id' => Auth::id(),
+            'action' => 'edit',
+            'text' => 'Update secret account info.'   
+            ]);
 
             return redirect()->back()
             ->with('type', 'success')
@@ -177,14 +184,17 @@ class SecretAccountController extends Controller
 
     public function deleteSecretAccount($id)
     {
-
         // Delete the secret account
         $secretAccount = SecretAccount::find($id);
         $secretAccount->isDeleted = '1';
         $secretAccount->save();
 
-        return redirect()->back()
-            ->with('type', 'success')
-            ->with('message', 'Secret Account successfully deleted.');
+        AuditLogs::create([
+            'user_id' => Auth::id(),
+            'action' => 'delete',
+            'text' => 'Deleted a secret account.'   
+            ]);
+
+        return back()->with('message', 'Secret account deleted successfully.')->with('type', 'success');
     }
 }

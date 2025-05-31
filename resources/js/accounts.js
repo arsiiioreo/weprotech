@@ -1,48 +1,66 @@
-// async function viewAccounts(id) {
-//     const verified = await vp(id);
+let pass =''
+let passDecoded =''
+
+async function viewAccounts(id) {
+    const verified = await vp();
     
-//   if (verified === null) {
-//     Swal.fire({
-//       icon: "error",
-//       title: "Incorrect password",
-//       text: "Access denied. Deletion canceled.",
-//     });
-//   }
+  if (verified) {
+    const viewAccount = new bootstrap.Modal(document.getElementById('viewAccountModal'));
+    const card = document.getElementById(`account-${id}`);
   
-//     if (verified === true) {
-//       // Open the view diary modal
-//       const viewDiaryModal = new bootstrap.Modal(document.getElementById('viewDiaryModal'));
-//       viewDiaryModal.show();
-//     }
-// }
+    // Extract from data-*
+    const category = card.dataset.category;
+    const account_name = card.dataset.account_name;
+    const account_email = card.dataset.account_email;
+    const password = card.dataset.password;
+  
+    // Populate modal
+    document.getElementById('viewCategory').value = category;
+    document.getElementById('viewAccName').value = account_name;
+    document.getElementById('viewAccEmail').value = account_email;
+    document.getElementById('viewPassword').value = password;
 
-// window.viewAccounts = viewAccounts;
+    pass = card.dataset.password;
+    passDecoded = card.dataset.password_decoded;
+  
+    viewAccount.show();  
+  }
+}
 
-async function deleteDiary(id) {
-  const verified = await vp();
+var showPass = document.getElementById('showPass')
+showPass?.addEventListener('change', function () {
+const passField = document.getElementById('viewPassword');
+  passField.type = this.checked ? 'text' : 'password';
+  passField.value = this.checked ? passDecoded : pass;
+});
 
-  if (verified === true) {
+window.viewAccounts = viewAccounts;
+
+async function deleteAccount(id) {
+  var verified = await vp();
+
+  if (verified) {
     const result = await Swal.fire({
       title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      text: "This action cannot be undone.",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#6c757d",
       confirmButtonText: "Yes, delete it!",
+      reverseButtons: true
     });
 
     if (result.isConfirmed) {
-      alert(id + " is deleted."); 
+      try {
+        location.replace(`/delete-account/${id}`);
+      } catch (error) {
+        Swal.fire("Error", "Something went wrong while deleting.", "error");
+        console.error(error);
+      }
     }
-  } else if (verified === false) {
-    Swal.fire({
-      icon: "error",
-      title: "Incorrect password",
-      text: "Access denied. Deletion canceled.",
-    });
-  } 
+  }
 }
 
 
-window.deleteDiary = deleteDiary;
+window.deleteAccount = deleteAccount;
