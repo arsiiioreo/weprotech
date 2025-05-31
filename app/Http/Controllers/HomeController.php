@@ -16,8 +16,8 @@ class HomeController extends Controller
         return view('client.home', [
             'title' => 'WeProTech - Home',
             'user' => $user,
-            'totalAccounts' => SecretAccount::where('user_id', Auth::id())->count(),
-            'totalSecrets' => SecretMessage::where('user_id', Auth::id())->count(),
+            'totalAccounts' => SecretAccount::where('user_id', Auth::id())->where('isDeleted, 0')->count(),
+            'totalSecrets' => SecretMessage::where('user_id', Auth::id())->where('isDeleted, 0')->count(),
             'totalLogs' => AuditLogs::where('user_id', Auth::id())->count(),
         ]);
     }
