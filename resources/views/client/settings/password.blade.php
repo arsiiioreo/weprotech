@@ -1,42 +1,25 @@
-<form action="">
+<form action="{{route('updateVault')}}" method="POST">
+    @csrf
     <div class="mb-3">
         <small class="text-muted"><strong>Vault Password</strong></small>
     </div>
 
     <div class="mb-3 w-100">
-        <label for="old_password" class="form-label">Old Password</label>
-        <input 
-            type="password" 
-            id="old_password" 
-            name="old_password" 
-            class="form-control" 
-            placeholder="Enter old password" 
-            required 
-        />
+        <label for="vault_new_password" class="form-label">New Password</label>
+        <input type="password" id="vault_new_password" name="vault_new_password" class="form-control" placeholder="Enter new password" required>
+        <x-input-error :messages="$errors->get('vault_new_password')" class="invalid-feedback d-block" />
     </div>
 
     <div class="mb-3 w-100">
-        <label for="new_password" class="form-label">New Password</label>
-        <input 
-            type="password" 
-            id="new_password" 
-            name="new_password" 
-            class="form-control" 
-            placeholder="Enter new password" 
-            required 
-        />
+        <label for="vault_new_password_confirmation" class="form-label">Confirm New Password</label>
+        <input type="password" id="vault_new_password_confirmation" name="vault_new_password_confirmation" class="form-control" placeholder="Enter current password" autocomplete="false" required>
+        <x-input-error :messages="$errors->get('vault_new_password_confirmation')" class="invalid-feedback d-block" />
     </div>
 
     <div class="mb-3 w-100">
-        <label for="confirm_password" class="form-label">Confirm New Password</label>
-        <input 
-            type="password" 
-            id="confirm_password" 
-            name="confirm_password" 
-            class="form-control" 
-            placeholder="Confirm new password" 
-            required 
-        />
+        <label for="vault_password" class="form-label">Old New Password</label>
+        <input type="password" id="vault_password" name="vault_password" class="form-control" placeholder="Enter current password" autocomplete="false" required>
+        <x-input-error :messages="$errors->get('vault_password')" class="invalid-feedback d-block" />
     </div>
 
     <div class="text-end">

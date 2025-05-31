@@ -26,8 +26,8 @@
       Today: <span class="fw-bold" id="current-time"></span>
     </p>
 
-    <img src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&background=191919&color=fff&size=64"
-      style="width: 35px; border-radius: 50%; border: 2px solid #191919;">
+    <a href="{{route('profile')}}"><img src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&background=191919&color=fff&size=64"
+      style="width: 35px; border-radius: 50%; border: 2px solid #191919;"></a>
   </div>
 </div>
 @endif

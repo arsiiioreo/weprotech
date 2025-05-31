@@ -30,34 +30,35 @@ async function logout() {
       allowOutsideClick: false,
       didOpen: () => {
           Swal.showLoading();
-          fetch('/logout')
-      },
+        },
     });
-
     try {
-      await axios.get(`/logout`);
+        location.replace('/logout')
 
     } catch (error) {
-      Swal.fire("Error", "Something went wrong while logging out.", "error");
-      console.error(error);
+        Swal.fire("Error", "Something went wrong while logging out.", "error");
+        console.error(error);
     }
   }
-}
+}       
 
+function out() {
+
+}
 
 window.logout = logout;
 
 
+
 async function vp() {
     const modalElements = document.querySelectorAll('.modal');
-
     modalElements.forEach(modalEl => {
-    const modalInstance = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
-    modalInstance.hide();
+        const modalInstance = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+        modalInstance.hide();
     });
 
 
-    const { isConfirmed, value: password } = await Swal.fire({
+    const { isConfirmed, value: vault_password } = await Swal.fire({
         title: "Verify Vault Access",
         input: "password",
         inputLabel: "Enter your vault password",
@@ -81,11 +82,8 @@ async function vp() {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': token,
             },
-            body: JSON.stringify({ password: password})
+            body: JSON.stringify({ password: vault_password })
         });
-
-        console.log(password);
-        
 
         const data = await res.json();
 

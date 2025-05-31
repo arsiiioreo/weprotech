@@ -50,6 +50,11 @@ class SecretMessageController extends Controller
         $secretMessage->title = Crypt::encryptString($request->title);
         $secretMessage->message = Crypt::encryptString($request->message);
         $secretMessage->save();
+        AuditLogs::create([
+            'user_id' => Auth::id(),
+            'action' => 'create',
+            'text' => 'Created a diary.'   
+            ]);
 
         return redirect()->back()
             ->with('type', 'success')
@@ -121,7 +126,12 @@ class SecretMessageController extends Controller
         $secretMessage = SecretMessage::find($request->id);
         $secretMessage->isDeleted = '1';
         $secretMessage->save();
+        AuditLogs::create([
+            'user_id' => Auth::id(),
+            'action' => 'delete',
+            'text' => 'Deletd a diary.'
+        ]);
 
-        return response()->json(['status' => 'success', 'message' => 'Secret message deleted successfully'], 200);
+        return back()->with('message', 'Diary successfully deleted.')->with('type', 'success');
     }
 }

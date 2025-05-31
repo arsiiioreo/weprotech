@@ -41,6 +41,7 @@ Route::middleware(['auth'])->group(function () {
     
     Route::middleware(['vault.set'])->group(function () {
         Route::post('/vault/verify', [SecretPasswordController::class, 'verifyPassword']);
+        Route::post('/vault/update', [SecretPasswordController::class, 'changePassword'])->name('updateVault');
         
         // Accounts
         Route::get('/accounts', [SecretAccountController::class, 'index'])->name('accounts');
@@ -48,15 +49,14 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/create-account', [SecretAccountController::class, 'createSecretAccount'])->name('createSecretAccount');
         Route::get('/open-edit-account/{id}', [SecretAccountController::class, 'openEditAccountModal'])->name('openEditAccountModal');
         Route::post('/update-account', [SecretAccountController::class, 'updateSecretAccount'])->name('updateSecretAccount');
-        Route::post('/delete-account/{id}', [SecretAccountController::class, 'deleteSecretAccount'])->name('deleteSecretAccount');
+        Route::get('/delete-account/{id}', [SecretAccountController::class, 'deleteSecretAccount'])->name('deleteSecretAccount');
         
         // Diaries
         Route::get('/diary', [SecretMessageController::class, 'index'])->name('diary');
         Route::post('/add-diary', [SecretMessageController::class, 'createSecretMessage'])->name('add-diary');
-        Route::post('/delete-diary/{id}', [SecretMessageController::class, 'deleteSecretMessage'])->name('delete-diary');
+        Route::get('/delete-diary/{id}', [SecretMessageController::class, 'deleteSecretMessage'])->name('delete-diary');
 
-        Route::get('/profile-edit', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::post('/profile-update', [UserController::class, 'updateProfile'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');        
     });
 });

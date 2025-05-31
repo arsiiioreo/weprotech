@@ -9,26 +9,10 @@
 
         @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/general.js', 'resources/js/diary.js'])
     </head>
-    <body class="d-flex align-items-center vh-100" style="background-color: #191919;">
-        <form action="{{ route('updateSecretAccount') }}" method="POST">
-            @csrf
-            <input type="hidden" name="id" value="8"> {{-- test ID --}}
-            <input type="text" name="category" value="test">
-            <input type="text" name="account_name" value="test">
-            <input type="email" name="account_email" value="test@email.com">
-            <input type="password" name="old_password" value="asdfasdf">
-            <input type="password" name="new_password" value="abcd1234">
-            <input type="password" name="new_password_confirmation" value="abcd1234">
-            <button type="submit">Test Submit</button>
-        </form>
+    <body class="d-flex align-items-center justify-content-center vh-100" style="background-color: #191919;">
+        <button class="btn btn-primary" onclick="vp()">Verify</button>
 
-        @if(session('message'))
-            <script>
-                window.addEventListener('load', function () {
-                    messageToast(@json(session('message')), @json(session('type') ?? 'success'));
-                });
-            </script>
-        @endif
+        <x-vault-password/>
     </body>
     @stack('scripts')
 </html>
