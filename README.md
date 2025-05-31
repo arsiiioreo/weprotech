@@ -91,7 +91,16 @@ This feature provides a storage vault with data encyrption to store the user's c
 > The diary is where you spill all the secrets you wanna tell someone but don't trust someone enough to tell them. This feature is also encrypted with the vault password.
 
 <img src="resources/images/screenshots/diary1.png">
+<img src="resources/images/screenshots/vault1.png">
+<img src="resources/images/screenshots/vault2.png">
 <img src="resources/images/screenshots/diary2.png">
+
+### WeProTech Settings Page
+
+> The settings page lets you update your credentials. In this page, you can update login credentials or even your vault password.
+
+<img src="resources/images/screenshots/settings1.png">
+<img src="resources/images/screenshots/settings2.png">
 
 ### WeProTech Profile Page
 
